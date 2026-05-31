@@ -1,0 +1,164 @@
+        
+        .scrolled {
+            background-color: rgba(18,65,123,.6) !important; /* 更改的背景颜色 */
+            backdrop-filter: blur(3px);
+            transition: 0.5s linear;
+            z-index: 9999;
+        }
+        
+        [type="text"]{
+            padding: 10px 5px;
+            font-size: 14px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            color: #bb7575;
+            flex: 1;
+            height: 36px;
+            line-height: 36px;
+        }
+        select{
+            padding: 2px 30px 0 5px;
+            font-size: 14px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            color: #bb7575;
+        }
+        
+        .el-input-number--mini{
+            width: 130px;
+        }
+        .el-input-number--mini .el-input__inner{
+            padding-left: 10px;
+            padding-right: 15px;
+        }
+        .el-input-number--mini .el-input-number__decrease,.el-input-number--mini .el-input-number__increase{
+            width: 35px;
+            margin-right: 0;
+        }
+        
+
+
+        .sealNav {
+            width: 90%;
+            /*min-width: 1000px;*/
+            height: auto;
+            background-color: rgba(242, 242, 242);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .sealNav .navItem {
+            width: 8.333%;
+            height: 100%;
+            border: 1px dashed gray;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            white-space: nowrap;
+            background-color: rgba(255, 255, 255, .9);
+        }
+        .sealNav .navItem02 {
+            background-color: rgba(255, 255, 255, .8);
+        }
+        .sealNav .navItem:hover {
+            background-color: rgba(0, 150, 136, .4);
+            color: white;
+        }
+        
+        
+        .sealMain{
+            width: 100%;
+
+            height: auto;
+            min-height: 360px;
+            border: 0px solid lightgray;
+            display: flex;
+
+        }
+        
+        .leftBox{
+            width: auto;
+            min-width: 340px;
+            min-height: 250px;
+            height: auto;
+            padding: 5px;
+            border-right: 1px solid lightgray;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        .previewTitle{
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            font-size: 14px;
+        }
+        .sealdiv{
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            max-height: 350px;
+            min-width: 250px;
+            min-height: 250px;
+            overflow: auto;
+        }
+        
+        .canvas {
+             transform: translateZ(0); /* 强制GPU渲染 */
+                  }
+        
+        .rightBox{
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .itemBox{
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .setItemBox{
+            /* display: flex; */
+            align-items: center;
+            /* flex-wrap: wrap; */
+            margin-top: 14px;
+        }
+        .setItem{
+            display: flex;
+            /* flex-direction: column; */
+            /* margin-left: 12px; */
+            padding: 2px;
+        }
+        .setItem span{
+            color: #624f4f;
+            font-size: 14px;
+            /* width: 80px; */
+            height: 34px;
+            line-height: 34px;
+            margin-right: 10px;
+        }
+        .setItemBox .setItem:nth-child(1) span:nth-child(1){
+            font-weight: 600;
+        }
+        
+        @media screen and (max-width: 1400px) {
+            .sealMain{
+                width: 96%;
+            }
+            .sealNav .navItem {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1100px) {
+            .sealNav {
+                transform: scale(0.9);
+            }
+        }
+
+        canvas {margin: auto;}
