@@ -1,5 +1,6 @@
-        new Vue({
+        var vm = new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '作废小圆章',
@@ -7,10 +8,12 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 主文字
                     input01: '作废',
-                    fontFamily01: '宋体',
+                    fontFamily01: '汉仪长宋简',
                     fontSize01: 52,
                     fontWeight01: 'normal',
                     fontTop01: 0,
