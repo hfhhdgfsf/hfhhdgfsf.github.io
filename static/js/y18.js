@@ -1,5 +1,6 @@
-        new Vue({
+        var vm = new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '骑缝章',
@@ -7,7 +8,9 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 公司
                     input01: '艾你图骑缝印章科技有限公司',
                     fontFamily01: '仿宋',
