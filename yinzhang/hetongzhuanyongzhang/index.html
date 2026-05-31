@@ -275,7 +275,7 @@ html,body{overflow:auto!important;height:auto!important}
               <div class="setItem"><span>颜色</span><el-color-picker v-model="color08" show-alpha @change="setChange"></el-color-picker></div>
               <div class="setItem"><span>尺寸</span><select v-model="sealSize09" @change="sizeChange"><option v-for="item,index in sealSize" :key="index" :value="item.size">{{item.size}}</option></select></div>
               <div class="setItem"><span>老化强度</span><el-input-number :min="0" :max="100" v-model="noisy10" @change="setChange" size="mini"></el-input-number></div>
-              <div class="setItem setItem-toggle"><span>老化效果</span><el-checkbox v-model="checked07" @change="isnoisyRadio">开启</el-checkbox></div>
+              <div class="setItem setItem-toggle"><span>老化效果</span><el-checkbox v-model="checked10" @change="isnoisyRadio">开启</el-checkbox></div>
             </div>
           </div>
           <div class="settings-footer"><span class="disclaimer">仅供学习测试，严禁非法使用</span></div>
