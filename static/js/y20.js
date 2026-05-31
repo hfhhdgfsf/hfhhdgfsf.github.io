@@ -1,5 +1,6 @@
-        new Vue({
+        var vm = new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '英文章',
@@ -7,7 +8,9 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 公司
                     input01: 'YinGood Seal Online Making Platform',
                     fontFamily01: '宋体',
@@ -20,7 +23,7 @@
                     input02_1: 'THE',
                     input02_2: 'COMMON SEAL',
                     input02_3: 'OF',
-                    fontFamily02: '宋体',
+                    fontFamily02: '汉仪长宋简',
                     fontSize02: 18,
                     fontWeight02: 'bold',
                     fontTop02: 0,
