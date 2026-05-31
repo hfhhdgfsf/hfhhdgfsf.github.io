@@ -1,6 +1,5 @@
-        var vm = new Vue({
+        new Vue({
             el: '#app',
-            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '日期圆章',
@@ -8,7 +7,9 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 自定义文字
                     input: '文控中心',
                     fontFamily: '仿宋',
@@ -192,13 +193,12 @@
                     context.font = this.fontWeight01 + ' ' + this.fontSize01*this.sealScale06 + 'px ' + this.fontFamily01
                     var count = this.input01.length;// 字数   
                     var angle = 4 * Math.PI / (3 * count + 30 - this.fontGap01);
-                    var baseAngle = 4 * Math.PI / (3 * count + 30);
                     var chars = this.input01.split("");
                     var c;
                     for (var i = 0; i < count; i++) {
                         c = chars[i];// 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.8) * Math.PI / 6 - (count - 1) * (angle - baseAngle) / 2); // centered
+                            context.rotate((6.8 - 0.05*this.fontRotate01) * Math.PI / 6);
                         else
                             context.rotate(angle);
                         context.save();
@@ -248,3 +248,11 @@
                 that.createSealEx2()
             }
         })
+        // 全局重绘函数 - 供原生按钮调用
+        window.regenerateSeal = function() {
+            var el = document.getElementById('app');
+            if (el && el.__vue__ && el.__vue__.createSealEx2) {
+                el.__vue__.createSealEx2();
+            }
+        };
+    
