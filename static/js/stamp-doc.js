@@ -263,6 +263,15 @@
     document.head.appendChild(s);
   }
 
+  // ---- html2canvas ----
+  function loadHtml2canvas(cb) {
+    if (window.html2canvas) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js';
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
   function loadDocx(file) {
     document.getElementById('stampUploadHint').textContent = '正在解析 Word 文档...';
     loadMammoth(function() {
@@ -523,8 +532,21 @@
     ctx.fillRect(0, 0, srcW, srcH);
 
     if (docType === 'docx') {
-      // DOCX: white bg only, skip unreliable SVG rendering
-      // (stamp position is calculated relative to docx viewer in drawSealAndDownload)
+      // Use html2canvas to render DOCX content
+      loadHtml2canvas(function() {
+        html2canvas(srcEl, { backgroundColor: '#FFFFFF', scale: 2, useCORS: true, logging: false }).then(function(docCanvas) {
+          canvas.width = docCanvas.width;
+          canvas.height = docCanvas.height;
+          ctx.drawImage(docCanvas, 0, 0);
+          // Update srcDims for stamp positioning
+          srcW = docCanvas.width; srcH = docCanvas.height;
+          drawSealAndDownload(ctx, canvas, sealImg, srcEl, srcW, srcH);
+        }).catch(function() {
+          alert('Word内容渲染失败，请尝试上传PDF或图片格式');
+          expBtn.disabled = false; expBtn.textContent = '导出图片';
+        });
+      });
+      return;
     } else {
       // Draw image/PDF content onto canvas
       ctx.drawImage(srcEl, 0, 0, srcW, srcH);
