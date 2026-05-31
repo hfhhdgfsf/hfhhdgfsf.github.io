@@ -222,7 +222,7 @@
                     for (var i = 0; i < counts; i++) {
                     	cs = charss[i];// 需要绘制的字符
                         if (i == 0){
-                            context.rotate((5.4+this.fontGap01*0.05) * Math.PI / 6); // -------------------------3.1  0.4:0.05
+                            context.rotate((5.4+this.fontGap05*0.05) * Math.PI / 6); // fixed: fontGap01→fontGap05
                         }else{
                             context.rotate(angles);
                         }  
@@ -241,12 +241,13 @@
                     context.font = this.fontWeight01 + ' ' + this.fontSize01*this.sealScale09 + 'px ' + this.fontFamily01
                     var count = this.input01.length; // 字数
                     var angle = 4 * Math.PI / (3 * count + 19 - this.fontGap01);
+                    var baseAngle = 4 * Math.PI / (3 * count + 19);
                     var chars = this.input01.split("");
                     var c;
                     for (var i = 0; i < count; i++) {
                         c = chars[i]; // 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.6 - 0.05*this.fontGap01) * Math.PI / 6);
+                            context.rotate((6.6) * Math.PI / 6 - (count - 1) * (angle - baseAngle) / 2); // centered
                         else
                             context.rotate(angle);
                         context.save();

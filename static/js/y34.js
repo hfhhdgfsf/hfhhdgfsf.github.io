@@ -191,12 +191,13 @@
                     context.font = this.fontWeight01 + ' ' + this.fontSize01*this.sealScale06 + 'px ' + this.fontFamily01
                     var count = this.input01.length;// 字数   
                     var angle = 4 * Math.PI / (3 * count + 30 - this.fontGap01);
+                    var baseAngle = 4 * Math.PI / (3 * count + 30);
                     var chars = this.input01.split("");
                     var c;
                     for (var i = 0; i < count; i++) {
                         c = chars[i];// 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.8 - 0.05*this.fontGap01) * Math.PI / 6);
+                            context.rotate((6.8) * Math.PI / 6 - (count - 1) * (angle - baseAngle) / 2); // centered
                         else
                             context.rotate(angle);
                         context.save();
