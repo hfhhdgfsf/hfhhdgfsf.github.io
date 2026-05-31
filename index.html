@@ -1,9 +1,373 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=yinzhang/yuanxingyinzhang/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线印章生成器 - 免费在线制作电子印章 | 支持PDF盖章PNG导出</title>
+<meta name="keywords" content="在线印章生成器,免费印章制作,电子印章,PDF盖章,圆形印章,公章在线生成">
+<meta name="description" content="专业的在线印章生成器，支持35种印章模板，免费在线制作公司印章、圆形印章、椭圆印章等。支持PDF盖章、PNG透明背景导出，无需安装任何软件。">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://getxelix.asia/">
+<link rel="stylesheet" href="static/css/app.css?v=2">
+<link rel="stylesheet" href="static/css/index.css?v=2">
+<link rel="stylesheet" href="css/easyseal.css?v=2">
+<link rel="stylesheet" href="css/sealfont.css?v=2">
+<link rel="stylesheet" href="css/premium.css?v=2">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;color:#1D1D1F;background:#FBFBFD;line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(251,251,253,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:48px;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-logo{font-size:17px;font-weight:600;color:#1D1D1F;text-decoration:none;letter-spacing:-.01em}
+.nav-cta{font-size:13px;font-weight:500;background:#0071E3;color:#fff;padding:6px 16px;border-radius:20px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:#0066CC}
+
+/* Hero */
+.hero{padding:80px 24px 60px;text-align:center}
+.hero-tag{display:inline-block;font-size:12px;font-weight:500;color:#0071E3;background:#E8F0FE;padding:4px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:.03em}
+.hero h1{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-.02em;color:#1D1D1F;margin-bottom:16px;line-height:1.15}
+.hero h1 span{background:linear-gradient(135deg,#0071E3,#5B5EA6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-desc{font-size:17px;color:#6E6E73;max-width:520px;margin:0 auto 28px;line-height:1.6}
+.hero-features{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.hero-feat{display:flex;align-items:center;gap:8px;font-size:14px;color:#6E6E73}
+.hero-feat svg{flex-shrink:0}
+.hero-btn{display:inline-block;font-size:16px;font-weight:600;background:#0071E3;color:#fff;padding:13px 32px;border-radius:28px;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(0,113,227,.3)}
+.hero-btn:hover{background:#0066CC;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,113,227,.4)}
+.hero-scroll{margin-top:40px;animation:bounce 2s infinite}
+.hero-scroll a{color:#AEAEB2;text-decoration:none;font-size:24px}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* Section titles */
+.sec-title{text-align:center;margin-bottom:40px}
+.sec-title h2{font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-.01em;color:#1D1D1F;margin-bottom:8px}
+.sec-title p{font-size:15px;color:#86868B}
+
+/* Templates */
+.templates{padding:60px 24px}
+.tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.tpl-card{display:flex;flex-direction:column;align-items:center;padding:28px 16px 20px;background:#fff;border-radius:16px;border:1px solid #E5E5EA;text-decoration:none;color:#1D1D1F;transition:all .2s}
+.tpl-card:hover{border-color:#0071E3;box-shadow:0 8px 30px rgba(0,0,0,.06);transform:translateY(-2px)}
+.tpl-card img{width:64px;height:64px;border-radius:12px;margin-bottom:14px;background:#FBFBFD;padding:10px}
+.tpl-card h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.tpl-card p{font-size:12px;color:#AEAEB2}
+.tpl-more{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:28px 16px 20px;background:#FBFBFD;border-radius:16px;border:1px dashed #D2D2D7;text-decoration:none;color:#86868B;transition:all .2s;cursor:pointer}
+.tpl-more:hover{border-color:#0071E3;color:#0071E3}
+.tpl-more .more-icon{font-size:32px;margin-bottom:8px}
+.tpl-more span{font-size:14px;font-weight:500}
+.tpl-cta{text-align:center;margin-top:32px}
+
+/* Features */
+.features{padding:60px 24px;background:#fff;border-top:1px solid #F0F0F5;border-bottom:1px solid #F0F0F5}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.feat-card{text-align:center;padding:32px 20px}
+.feat-icon{width:48px;height:48px;background:#E8F0FE;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.feat-card h3{font-size:17px;font-weight:600;margin-bottom:8px}
+.feat-card p{font-size:13px;color:#86868B;max-width:260px;margin:0 auto;line-height:1.7}
+
+/* Steps */
+.steps{padding:60px 24px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step-card{text-align:center;position:relative}
+.step-num{width:40px;height:40px;background:#0071E3;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;margin:0 auto 16px}
+.step-card h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.step-card p{font-size:13px;color:#86868B}
+.step-arrow{display:none}
+
+/* FAQ */
+.faq{padding:60px 24px;background:#fff;border-top:1px solid #F0F0F5}
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid #E5E5EA;padding:18px 0}
+.faq-q{font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.faq-q:after{content:"+";font-size:20px;color:#86868B;transition:transform .2s}
+.faq-q.open:after{content:"−";transform:rotate(180deg)}
+.faq-a{font-size:13px;color:#6E6E73;line-height:1.8;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
+.faq-a.open{max-height:300px;padding-top:10px}
+
+/* SEO */
+.seo{padding:60px 24px}
+.seo-block{margin-bottom:12px;border:1px solid #E5E5EA;border-radius:12px;overflow:hidden}
+.seo-summary{font-size:14px;font-weight:600;color:#1D1D1F;padding:14px 20px;cursor:pointer;list-style:none;background:#FBFBFD;display:flex;justify-content:space-between;align-items:center}
+.seo-summary::-webkit-details-marker{display:none}
+.seo-summary:after{content:"展开▾";font-size:11px;color:#86868B;font-weight:400}
+.seo-block[open] .seo-summary:after{content:"收起▴"}
+.seo-content{padding:0 20px 18px;font-size:13px;color:#6E6E73;line-height:1.9}
+.seo-content h3{font-size:14px;color:#1D1D1F;margin:12px 0 6px}
+.seo-content strong{color:#1D1D1F}
+
+/* Footer */
+.footer{padding:40px 24px;background:#1D1D1F;color:#AEAEB2;text-align:center}
+.footer-links{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:20px}
+.footer-links a{color:#86868B;text-decoration:none;font-size:13px;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:11px;color:#636366}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero{padding:50px 16px 40px}
+  .steps-grid{grid-template-columns:1fr;gap:16px}
+  .tpl-grid{grid-template-columns:repeat(2,1fr)}
+  .feat-grid{grid-template-columns:1fr}
+  .container{padding:0 16px}
+}
+@media(max-width:480px){
+  .tpl-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .tpl-card{padding:16px 8px 12px}
+  .tpl-card img{width:48px;height:48px}
+  .tpl-card h3{font-size:13px}
+}
+</style>
 </head>
 <body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">印章生成器</a>
+    <a href="yinzhang/yuanxingyinzhang/" class="nav-cta">开始制作</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-tag">免费在线工具</div>
+  <h1>在线<span>印章</span>生成器</h1>
+  <p class="hero-desc">专业级电子印章在线制作工具，无需下载任何软件，浏览器中即可完成从设计到导出的全流程。</p>
+  <div class="hero-features">
+    <div class="hero-feat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      35种印章模板
+    </div>
+    <div class="hero-feat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      支持PDF盖章
+    </div>
+    <div class="hero-feat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      透明PNG导出
+    </div>
+  </div>
+  <a href="yinzhang/yuanxingyinzhang/" class="hero-btn">开始制作印章 →</a>
+  <div class="hero-scroll"><a href="#templates">↓</a></div>
+</section>
+
+<!-- Templates -->
+<section class="templates" id="templates">
+  <div class="container">
+    <div class="sec-title">
+      <h2>热门印章模板</h2>
+      <p>精选最受欢迎的印章类型，点击即可开始制作</p>
+    </div>
+    <div class="tpl-grid">
+      <a href="yinzhang/yuanxingyinzhang/" class="tpl-card">
+        <img src="img/pic1.png" alt="圆形印章" loading="lazy">
+        <h3>圆形印章</h3>
+        <p>最常用的企业印章</p>
+      </a>
+      <a href="yinzhang/gongzhangyinzhang/" class="tpl-card">
+        <img src="img/pic2.png" alt="公章印章" loading="lazy">
+        <h3>公章印章</h3>
+        <p>标准公章格式</p>
+      </a>
+      <a href="yinzhang/fengongsigongzhang/" class="tpl-card">
+        <img src="img/pic3.png" alt="分公司公章" loading="lazy">
+        <h3>分公司公章</h3>
+        <p>带分公司名称</p>
+      </a>
+      <a href="yinzhang/hetongzhuanyongzhang/" class="tpl-card">
+        <img src="img/pic4.png" alt="合同专用章" loading="lazy">
+        <h3>合同专用章</h3>
+        <p>合同签署专用</p>
+      </a>
+      <a href="yinzhang/yewuzhuanyongzhang/" class="tpl-card">
+        <img src="img/pic5.png" alt="业务专用章" loading="lazy">
+        <h3>业务专用章</h3>
+        <p>业务文件签章</p>
+      </a>
+      <a href="yinzhang/tuoyuanyinzhang/" class="tpl-card">
+        <img src="img/pic6.png" alt="椭圆印章" loading="lazy">
+        <h3>椭圆印章</h3>
+        <p>经典椭圆造型</p>
+      </a>
+      <a href="yinzhang/fapiaozhuanyongzhang/" class="tpl-card">
+        <img src="img/pic7.png" alt="发票专用章" loading="lazy">
+        <h3>发票专用章</h3>
+        <p>财务发票签章</p>
+      </a>
+      <a href="yinzhang/baoguanzhuanyongzhang/" class="tpl-card">
+        <img src="img/pic8.png" alt="报关专用章" loading="lazy">
+        <h3>报关专用章</h3>
+        <p>进出口报关签章</p>
+      </a>
+    </div>
+    <div class="tpl-cta">
+      <a href="yinzhang/yuanxingyinzhang/" class="hero-btn" style="font-size:14px;padding:11px 28px;">查看全部 35 种模板 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+  <div class="container">
+    <div class="sec-title">
+      <h2>为什么选择我们</h2>
+      <p>专业、免费、安全，无需安装任何软件</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3>支持PDF盖章</h3>
+        <p>上传PDF文件，在线调整印章位置、大小和角度，一键导出盖章后的文件。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <h3>透明背景导出</h3>
+        <p>支持PNG透明背景格式导出，印章可直接用于Word、Excel、PPT等办公软件中。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>实时在线编辑</h3>
+        <p>所有参数实时预览，调整字体、间距、颜色、老化效果，所见即所得，无需等待渲染。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="steps">
+  <div class="container">
+    <div class="sec-title">
+      <h2>三步完成印章制作</h2>
+      <p>从选择模板到导出文件，不到一分钟</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>选择模板</h3>
+        <p>从35种印章类型中挑选适合的模板，涵盖企业公章、合同章、财务章等各类场景。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>编辑内容</h3>
+        <p>输入公司名称、调整字体字号、设置颜色和老化效果，实时预览每一次修改。</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>导出文件</h3>
+        <p>一键下载PNG透明背景图片，或使用盖章功能直接叠加到PDF文档上导出。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="sec-title">
+      <h2>常见问题</h2>
+      <p>关于印章生成器的使用说明</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">生成的印章可以商用吗？</div>
+        <div class="faq-a">本工具仅供学习和测试使用。生成的电子印章可用于文档示意、设计稿预览等非正式场景。如需正式印章，请通过合法渠道刻制实体印章并完成备案。请勿将生成的印章用于任何非法用途。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">支持哪些文件格式？</div>
+        <div class="faq-a">印章导出支持PNG格式（透明背景）。盖章功能支持上传JPG、PNG、WebP图片以及PDF和Word(.docx)文档。上传文件后可将印章自由叠加到文档上，调整位置、大小和角度后导出合成图片。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">是否需要注册或付费？</div>
+        <div class="faq-a">完全免费，无需注册。所有功能在浏览器中即可使用，不会上传您的文件到任何服务器。印章生成和文档处理均在您的设备本地完成，保障隐私安全。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">印章的红色和尺寸可以自定义吗？</div>
+        <div class="faq-a">可以。我们提供完整的参数调整面板，包括印章颜色、尺寸、字体、字间距、笔画粗细、上下左右偏移量以及老化效果强度。所有调整实时预览，确保最终效果满意。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo">
+  <div class="container">
+    <div class="sec-title">
+      <h2>更多关于在线印章</h2>
+      <p>点击展开了解更多</p>
+    </div>
+
+    <details class="seo-block">
+      <summary class="seo-summary">什么是在线印章生成器？如何使用它制作电子印章？</summary>
+      <div class="seo-content">
+        <p>在线印章生成器是一种基于浏览器的免费工具，用户无需下载或安装任何软件，即可在线制作各类电子印章。无论是企业公章、合同专用章、财务章还是发票专用章，只需选择对应模板、输入公司名称和相关信息，调整字体、颜色、大小等参数，即可实时预览并一键导出PNG透明背景图片。整个过程在本地浏览器中完成，文件不会上传至服务器，安全可靠。支持在印章生成后直接叠加到PDF或Word文档上，实现完整的电子签章流程。</p>
+      </div>
+    </details>
+
+    <details class="seo-block">
+      <summary class="seo-summary">电子印章有哪些常见类型？各自的用途是什么？</summary>
+      <div class="seo-content">
+        <p>常见的电子印章类型包括：<strong>圆形印章</strong>——最常用的企业印章格式，适用于日常行政文件；<strong>公章印章</strong>——标准圆形公章，用于正式文件签署；<strong>合同专用章</strong>——专门用于合同签署的椭圆印章；<strong>发票专用章</strong>——财务发票上使用的专用章；<strong>椭圆印章</strong>——常见于报关、收费等特定业务场景；<strong>财务章</strong>——用于财务凭证和报表。此外还有法人私章、骑缝章、质检章、日期章等多种专业印章类型，覆盖企业日常办公中的绝大多数签章需求。</p>
+      </div>
+    </details>
+
+    <details class="seo-block">
+      <summary class="seo-summary">在线制作电子印章安全吗？文件会被上传到服务器吗？</summary>
+      <div class="seo-content">
+        <p>本工具采用纯前端技术实现，所有印章生成、图片处理和文档盖章操作均在您的本地浏览器中完成，不会将任何文件上传到远程服务器。您上传的PDF、Word文档和图片仅存在于浏览器内存中，关闭页面后即被清除。生成的印章图片通过Canvas API直接输出，全程无需联网传输数据。我们建议在正式使用前，先确认浏览器的隐私设置，并避免在公共电脑上处理敏感文件。对于高度机密的商业文件，建议使用专业的企业级电子签章系统。</p>
+      </div>
+    </details>
+
+    <details class="seo-block">
+      <summary class="seo-summary">印章的字体和样式可以自定义吗？支持哪些调整选项？</summary>
+      <div class="seo-content">
+        <p>我们提供了丰富的自定义选项：<strong>字体选择</strong>——支持宋体、仿宋、楷体、黑体等常用中文字体；<strong>字号调整</strong>——从10px到100px自由设置；<strong>字间距控制</strong>——精确调整文字间距，文字从中心向外均匀分布；<strong>颜色自定义</strong>——除了经典红色，还支持任意RGB颜色选择；<strong>老化效果</strong>——模拟真实印章的噪点和磨损质感，强度从0到100可调；<strong>微调功能</strong>——支持文字上下左右位置微调，实现像素级精准控制。圆形印章还支持环形文字旋转角度调整。</p>
+      </div>
+    </details>
+
+    <details class="seo-block">
+      <summary class="seo-summary">如何将电子印章盖到PDF或Word文档上？</summary>
+      <div class="seo-content">
+        <p>使用我们的"盖章"功能，您可以轻松将生成的印章叠加到文档上：点击页面底部的<strong>盖章按钮</strong>，进入盖章模式后上传您的PDF、Word或图片文件。文件加载完成后，印章会自动出现在文档上。您可以通过<strong>鼠标拖拽移动</strong>印章位置、<strong>滚轮缩放</strong>调整大小、<strong>Shift+滚轮旋转</strong>调整角度，或使用四角手柄进行精确控制。在手机端支持<strong>双指捏合缩放</strong>和<strong>双指旋转</strong>。调整到满意位置后，点击"导出图片"即可下载盖章后的文档。PDF支持翻页浏览每一页的内容。</p>
+      </div>
+    </details>
+
+    <details class="seo-block">
+      <summary class="seo-summary">在线印章生成器和实体印章有什么区别？</summary>
+      <div class="seo-content">
+        <p>在线生成的电子印章主要用于文档示意、设计预览和电子文档签章场景，其外观可以做到与实体印章高度相似，但在法律效力上与公安机关备案的实体印章有本质区别。实体印章需要经过工商注册、公安备案等法定程序，具有法律认可的签章效力。电子印章适合用于：企业内部流转文件、设计稿审查、客户演示文档、线上审批流程中的示意签章等非正式场景。对于需要法律效力的正式合同，请使用经过认证的电子签章平台或实体印章。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="yinzhang/yuanxingyinzhang/">圆形印章</a>
+    <a href="yinzhang/gongzhangyinzhang/">公章印章</a>
+    <a href="yinzhang/hetongzhuanyongzhang/">合同专用章</a>
+    <a href="yinzhang/fapiaozhuanyongzhang/">发票专用章</a>
+    <a href="yinzhang/caiwuzhang/">财务章</a>
+    <a href="yinzhang/farensizhang/">法人私章</a>
+  </div>
+  <div class="footer-copy">仅供学习测试使用，严禁非法用途 &copy; 2026 印章生成器</div>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'})})});
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.classList.toggle('open');q.nextElementSibling.classList.toggle('open')})});
+</script>
 </body>
 </html>
