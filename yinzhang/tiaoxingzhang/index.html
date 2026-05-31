@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>合同专用章在线生成印章工具_印章在线生成器_电子印章生成器</title>
+<title>条形章在线生成印章工具_印章在线生成器_电子印章生成器</title>
 <meta name="keywords" content="免费印章生成，在线印章制作，在线印章生成器">
 <meta name="description" content="在线免费印章生成器，支持公司印章、圆形印章、椭圆印章等。生成的电子印章支持下载到本地。">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -265,15 +265,15 @@ html,body{overflow:auto!important;height:auto!important}
               <div class="setItem"><span>左右偏移</span><el-input-number :min="-100" :max="100" v-model="rectLeft06" @change="setChange" size="mini"></el-input-number></div>
             </div>
             <div class="setItemBox" v-show="tabIndex==5">
-              <div class="setItem"><span>外边线</span><el-input-number :min="1" :max="6" v-model="border06" @change="setChange" size="mini"></el-input-number></div>
-              <div class="setItem"><span>内边线</span><el-input-number :min="1" :max="6" v-model="border07" @change="setChange" size="mini"></el-input-number></div>
+              <div class="setItem"><span>外边线</span><el-input-number :min="1" :max="6" v-model="border03" @change="setChange" size="mini"></el-input-number></div>
+              <div class="setItem"><span>内边线</span><el-input-number :min="1" :max="6" v-model="border03" @change="setChange" size="mini"></el-input-number></div>
               <div class="setItem setItem-toggle"><span>内边线</span><el-checkbox v-model="checked05" @change="setChange">显示</el-checkbox></div>
             </div>
             <div class="setItemBox" v-show="tabIndex==6">
-              <div class="setItem"><span>颜色</span><el-color-picker v-model="color08" show-alpha @change="setChange"></el-color-picker></div>
-              <div class="setItem"><span>尺寸</span><select v-model="sealSize09" @change="sizeChange"><option v-for="item,index in sealSize" :key="index" :value="item.size">{{item.size}}</option></select></div>
-              <div class="setItem"><span>老化强度</span><el-input-number :min="0" :max="100" v-model="noisy10" @change="setChange" size="mini"></el-input-number></div>
-              <div class="setItem setItem-toggle"><span>老化效果</span><el-checkbox v-model="checked10" @change="isnoisyRadio">开启</el-checkbox></div>
+              <div class="setItem"><span>颜色</span><el-color-picker v-model="color04" show-alpha @change="setChange"></el-color-picker></div>
+              <div class="setItem"><span>尺寸</span><select v-model="sealSize05" @change="sizeChange"><option v-for="item,index in sealSize" :key="index" :value="item.size">{{item.size}}</option></select></div>
+              <div class="setItem"><span>老化强度</span><el-input-number :min="0" :max="100" v-model="noisy06" @change="setChange" size="mini"></el-input-number></div>
+              <div class="setItem setItem-toggle"><span>老化效果</span><el-checkbox v-model="checked06" @change="isnoisyRadio">开启</el-checkbox></div>
             </div>
           </div>
           <div class="settings-footer"><span class="disclaimer">仅供学习测试，严禁非法使用</span></div>
@@ -317,7 +317,7 @@ function filterCategory(c,btn){document.querySelectorAll('#categoryTabs .cat-btn
 <script defer src="../../static/js/common.js?v13"></script>
 
 
-<script defer src="../../static/js/y04.js?v=2"></script>
+<script defer src="../../static/js/y24.js?v=2"></script>
 <script defer src="../../static/js/stamp-doc.js?v=1"></script>
 
 <script>
