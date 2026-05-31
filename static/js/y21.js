@@ -1,5 +1,6 @@
-        new Vue({
+        var vm = new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '藏文章',
@@ -7,7 +8,9 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 主文字 藏文
                     input01: 'नानमो अमिताभ इलेक्ट्रॉनिक सील मेकिंग प्लेटफार्म',
                     fontFamily01: '宋体',
@@ -18,7 +21,7 @@
                     fontBorder01: 0,
                     // 副文字 中文
                     input02: '艾你图圆形印章科技有限公司',
-                    fontFamily02: '宋体',
+                    fontFamily02: '汉仪长宋简',
                     fontSize02: 20,
                     fontWeight02: 'normal',
                     fontGap02: 0,
@@ -26,14 +29,14 @@
                     fontBorder02: 0,
                     // 章名 藏文
                     input03: 'चैरिटी विशेष मुहर',
-                    fontFamily03: '宋体',
+                    fontFamily03: '汉仪长宋简',
                     fontSize03: 9,
                     fontWeight03: 'normal',
                     fontTop03: 0,
                     fontLeft03: 0,
                     // 章名 中文
                     input04: '慈善专用章',
-                    fontFamily04: '宋体',
+                    fontFamily04: '汉仪长宋简',
                     fontSize04: 17,
                     fontWeight04: 'normal',
                     fontTop04: 0,
