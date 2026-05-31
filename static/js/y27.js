@@ -1,5 +1,6 @@
-        new Vue({
+        var vm = new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '指纹章',
