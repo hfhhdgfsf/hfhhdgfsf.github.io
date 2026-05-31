@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /static/
 
-Sitemap: https://getxelix.asia/sitemap.xml
+Sitemap: http://getxelix.asia/sitemap.xml
