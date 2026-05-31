@@ -224,13 +224,13 @@
                     var companys = this.input05
                     var counts = companys.length;// 字数   
                     var angles = -4 * Math.PI / ((7.4-this.fontGap05*0.4) * (counts - 1));// 字间角度
-                    var baseAngles = -4 * Math.PI / (7.4 * (counts - 1));
-                    var charss = companys.split("");
+                                        var charss = companys.split("");
                     var cs;
                     for (var i = 0; i < counts; i++) {
                     	cs = charss[i];// 需要绘制的字符
                         if (i == 0){
-                            context.rotate((4.6) * Math.PI / 6 - (count - 1) * angle / 2); // center fixed
+                            var bottomCenter = 1.5594752737; // fixed center at default 产品检验合格
+                            context.rotate(bottomCenter - (counts - 1) * angles / 2); // center fixed
                         }else{
                             context.rotate(angles);
                         }  
@@ -247,11 +247,12 @@
                     var count = this.input01.length; // 字数
                     var angle = 4 * Math.PI / (3 * count + 28 - this.fontGap01);
                     var chars = this.input01.split("");
+                    var centerAngle = 4.7189339651; // fixed center at default text
                     var c;
                     for (var i = 0; i < count; i++) {
                         c = chars[i]; // 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.95) * Math.PI / 6 - (count - 1) * angle / 2); // center fixed
+                    context.rotate(centerAngle - (count - 1) * angle / 2); // center fixed
                         else
                             context.rotate(angle);
                         context.save();
