@@ -438,15 +438,16 @@
     viewer.addEventListener('touchstart', function(e) {
       if (!overlay.getAttribute('data-placed')) return;
       if (e.touches.length === 2) {
-        // Start pinch
         var t1 = e.touches[0], t2 = e.touches[1];
         pinchDist0 = getDist(t1, t2);
         pinchW0 = stampState.w; pinchH0 = stampState.h;
         pinchAngle0 = getAngle(t1, t2);
         pinchRot0 = stampState.rotation;
+        // Lock the anchor: record pinch center relative to stamp (0-1 ratios)
         var mid = getMidpoint(t1, t2);
-        pinchCenterX = mid.x; pinchCenterY = mid.y;
-        isDragging = isResizing = isRotating = false; // cancel single-touch
+        pinchCenterX = (mid.x - stampState.x) / stampState.w;
+        pinchCenterY = (mid.y - stampState.y) / stampState.h;
+        isDragging = isResizing = isRotating = false;
       }
     }, { passive: false });
 
@@ -459,11 +460,12 @@
         var scale = newDist / pinchDist0;
         var nw = Math.max(30, Math.min(500, pinchW0 * scale));
         var nh = pinchH0 * (nw / pinchW0);
-        // Scale from pinch center
-        stampState.x += (pinchW0 - nw) / 2;
-        stampState.y += (pinchH0 - nh) / 2;
+        // Scale around the locked anchor point
+        var mid = getMidpoint(t1, t2);
+        stampState.x = mid.x - nw * pinchCenterX;
+        stampState.y = mid.y - nh * pinchCenterY;
         stampState.w = nw; stampState.h = nh;
-        // Rotation from two-finger angle change
+        // Rotation
         var newAngle = getAngle(t1, t2);
         stampState.rotation = pinchRot0 + (newAngle - pinchAngle0);
         applyTransform();
