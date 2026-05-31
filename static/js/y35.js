@@ -248,7 +248,7 @@
                     for (var i = 0; i < count; i++) {
                         c = chars[i]; // 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.6 - 0.05*this.fontRotate01) * Math.PI / 6);
+                            context.rotate((6.6) * Math.PI / 6 - (count - 1) * (angle - 4 * Math.PI / (3 * count + 19)) / 2) // centered;
                         else
                             context.rotate(angle);
                         context.save();
