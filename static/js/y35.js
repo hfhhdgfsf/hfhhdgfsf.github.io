@@ -218,13 +218,14 @@
                     context.font = this.fontWeight05 + ' ' + this.fontSize05*this.sealScale09 + 'px ' + this.fontFamily05
                     var companys = this.input05
                     var counts = companys.length;// 字数   
-                    var angles = -4 * Math.PI / ((5-this.fontGap05*0.4) * (counts - 1));// 字间角度 ----------11  0.4:0.05 [10.6:3.15]
+                    var angles = -4 * Math.PI / ((5-this.fontGap05*0.4) * (counts - 1));// 字间角度
+                    var baseAngles = -4 * Math.PI / (5 * (counts - 1));
                     var charss = companys.split("");
                     var cs;
                     for (var i = 0; i < counts; i++) {
                     	cs = charss[i];// 需要绘制的字符
                         if (i == 0){
-                            context.rotate((5.4+this.fontRotate05*0.05) * Math.PI / 6); // -------------------------3.1  0.4:0.05
+                            context.rotate((5.4) * Math.PI / 6 - (counts - 1) * (angles - baseAngles) / 2); // centered bottom
                         }else{
                             context.rotate(angles);
                         }  
