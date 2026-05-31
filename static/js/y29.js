@@ -1,6 +1,5 @@
-        var vm = new Vue({
+        new Vue({
             el: '#app',
-            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '作废小圆章',
@@ -176,3 +175,11 @@
                 that.createSealEx2()
             }
         })
+        // 全局重绘函数 - 供原生按钮调用
+        window.regenerateSeal = function() {
+            var el = document.getElementById('app');
+            if (el && el.__vue__ && el.__vue__.createSealEx2) {
+                el.__vue__.createSealEx2();
+            }
+        };
+    
