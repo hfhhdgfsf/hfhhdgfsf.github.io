@@ -222,7 +222,7 @@
                     for (var i = 0; i < counts; i++) {
                     	cs = charss[i];// 需要绘制的字符
                         if (i == 0){
-                            context.rotate((5.4+this.fontRotate05*0.05) * Math.PI / 6); // -------------------------3.1  0.4:0.05
+                            context.rotate((5.4+this.fontGap01*0.05) * Math.PI / 6); // -------------------------3.1  0.4:0.05
                         }else{
                             context.rotate(angles);
                         }  
@@ -246,7 +246,7 @@
                     for (var i = 0; i < count; i++) {
                         c = chars[i]; // 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.6 - 0.05*this.fontRotate01) * Math.PI / 6);
+                            context.rotate((6.6 - 0.05*this.fontGap01) * Math.PI / 6);
                         else
                             context.rotate(angle);
                         context.save();
