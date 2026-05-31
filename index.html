@@ -77,11 +77,12 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
 .faq{padding:60px 24px;background:#FDF8F0}
 .faq-list{max-width:720px;margin:0 auto}
 .faq-item{border-bottom:1px solid rgba(92,64,51,.08);padding:18px 0}
-.faq-q{font-size:15px;font-weight:600;color:#2C2C2C;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
-.faq-q:after{content:"+";font-size:20px;color:#A89888;transition:transform .2s}
-.faq-q.open:after{content:"−"}
-.faq-a{font-size:13px;color:#6B5B4F;line-height:1.8;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
-.faq-a.open{max-height:300px;padding-top:10px}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-q{font-size:15px;font-weight:600;color:#2C2C2C;user-select:none}
+.faq-q:after{content:"+";font-size:20px;color:#A89888;transition:transform .2s;flex-shrink:0;margin-left:12px}
+.faq-item[open] .faq-q:after{content:"−"}
+.faq-a{font-size:13px;color:#6B5B4F;line-height:1.8;padding-top:10px}
 
 /* SEO */
 .seo{padding:60px 24px;background:#fff}
@@ -273,22 +274,27 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
       <p>关于印章生成器的使用说明</p>
     </div>
     <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">生成的印章可以商用吗？</div>
+
+      <details class="faq-item">
+        <summary class="faq-q">生成的印章可以商用吗？</summary>
         <div class="faq-a">本工具仅供学习和测试使用。生成的电子印章可用于文档示意、设计稿预览等非正式场景。如需正式印章，请通过合法渠道刻制实体印章并完成备案。请勿将生成的印章用于任何非法用途。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">支持哪些文件格式？</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">支持哪些文件格式？</summary>
         <div class="faq-a">印章导出支持PNG格式（透明背景）。盖章功能支持上传JPG、PNG、WebP图片以及PDF和Word(.docx)文档。上传文件后可将印章自由叠加到文档上，调整位置、大小和角度后导出合成图片。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">是否需要注册或付费？</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">是否需要注册或付费？</summary>
         <div class="faq-a">完全免费，无需注册。所有功能在浏览器中即可使用，不会上传您的文件到任何服务器。印章生成和文档处理均在您的设备本地完成，保障隐私安全。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">印章的红色和尺寸可以自定义吗？</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">印章的红色和尺寸可以自定义吗？</summary>
         <div class="faq-a">可以。我们提供完整的参数调整面板，包括印章颜色、尺寸、字体、字间距、笔画粗细、上下左右偏移量以及老化效果强度。所有调整实时预览，确保最终效果满意。</div>
-      </div>
+      </details>
+
     </div>
   </div>
 </section>
@@ -358,14 +364,5 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
   <div class="footer-copy">仅供学习测试使用，严禁非法用途 &copy; 2026 印章生成器</div>
 </footer>
 
-<script>
-// FAQ toggle only - scrolling is native
-document.querySelectorAll('.faq-q').forEach(function(q){
-  q.addEventListener('click',function(){
-    this.classList.toggle('open');
-    this.nextElementSibling.classList.toggle('open');
-  });
-});
-</script>
 </body>
 </html>
