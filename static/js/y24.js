@@ -1,5 +1,6 @@
  new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '条形章',
@@ -7,7 +8,9 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 主文字
                     input01: '艾你图条形印章在线制作',
                     fontFamily01: '宋体',
