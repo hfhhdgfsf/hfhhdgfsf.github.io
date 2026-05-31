@@ -1,5 +1,6 @@
   new Vue({
             el: '#app',
+            mounted() { window.vm = this; },
             data() {
                 return {tabIndex: 0,
                     sealName: '维文章',
@@ -7,7 +8,9 @@
                         {name: '宋体'},
                         {name: '仿宋'},
                         {name: '楷体'},
-                        {name: '黑体'},                    ],
+                        {name: '黑体'},
+                        {name: '汉仪长宋简'},
+                    ],
                     // 主文字 维文
                     input01: 'ئامىتابا تامغىسىنى ياساش سۇپىسى',
                     fontFamily01: '宋体',
@@ -18,7 +21,7 @@
                     fontBorder01: 0,
                     // 副文字 中文
                     input02: '艾你图圆形印章有限公司',
-                    fontFamily02: '宋体',
+                    fontFamily02: '汉仪长宋简',
                     fontSize02: 18,
                     fontWeight02: 'normal',
                     fontGap02: 0,
@@ -26,14 +29,14 @@
                     fontBorder02: 0,
                     // 章名 维文
                     input03: 'مالىيە مەخسۇس تامغىسى',
-                    fontFamily03: '宋体',
+                    fontFamily03: '汉仪长宋简',
                     fontSize03: 20,
                     fontWeight03: 'normal',
                     fontTop03: 0,
                     fontLeft03: 0,
                     // 章名 中文
                     input04: '财务专用章',
-                    fontFamily04: '宋体',
+                    fontFamily04: '汉仪长宋简',
                     fontSize04: 17,
                     fontWeight04: 'normal',
                     fontTop04: 0,
