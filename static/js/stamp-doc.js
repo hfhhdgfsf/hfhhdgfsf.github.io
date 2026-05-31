@@ -523,24 +523,10 @@
     ctx.fillRect(0, 0, srcW, srcH);
 
     if (docType === 'docx') {
-      // SVG foreignObject approach for HTML rendering
-      var data = '<svg xmlns="http://www.w3.org/2000/svg" width="' + srcW + '" height="' + srcH + '">' +
-        '<foreignObject width="100%" height="100%">' +
-        '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.8;color:#1D1D1F;padding:40px">' +
-        srcEl.innerHTML +
-        '</div></foreignObject></svg>';
-      var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-      var url = URL.createObjectURL(svgBlob);
-      var img = new Image();
-      img.onload = function() {
-        ctx.drawImage(img, 0, 0, srcW, srcH);
-        drawSealAndDownload(ctx, canvas, sealImg, srcEl, srcW, srcH);
-        URL.revokeObjectURL(url);
-      };
-      img.src = url;
-      return; // Early return - seal drawing happens in callback
+      // DOCX: white bg only, skip unreliable SVG rendering
+      // (stamp position is calculated relative to docx viewer in drawSealAndDownload)
     } else {
-      // Draw image/PDF canvas
+      // Draw image/PDF content onto canvas
       ctx.drawImage(srcEl, 0, 0, srcW, srcH);
     }
 
