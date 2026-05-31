@@ -15,31 +15,36 @@
 <link rel="stylesheet" href="css/sealfont.css?v=2">
 <link rel="stylesheet" href="css/premium.css?v=2">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;color:#1D1D1F;background:#FBFBFD;line-height:1.6;-webkit-font-smoothing:antialiased}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;color:#1D1D1F;background:#FBFBFD;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
 
-/* Nav */
-.nav{position:sticky;top:0;z-index:100;background:rgba(251,251,253,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
+/* Nav — frosted glass */
+.nav{position:sticky;top:0;z-index:100;background:rgba(251,251,253,.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(0,0,0,.05)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:48px;max-width:1200px;margin:0 auto;padding:0 24px}
 .nav-logo{font-size:17px;font-weight:600;color:#1D1D1F;text-decoration:none;letter-spacing:-.01em}
-.nav-cta{font-size:13px;font-weight:500;background:#0071E3;color:#fff;padding:6px 16px;border-radius:20px;text-decoration:none;transition:background .2s}
-.nav-cta:hover{background:#0066CC}
+.nav-cta{font-size:13px;font-weight:500;background:rgba(0,0,0,.06);color:#1D1D1F;padding:6px 16px;border-radius:20px;text-decoration:none;transition:all .2s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nav-cta:hover{background:rgba(0,0,0,.1)}
 
 /* Hero */
-.hero{padding:80px 24px 60px;text-align:center}
-.hero-tag{display:inline-block;font-size:12px;font-weight:500;color:#0071E3;background:#E8F0FE;padding:4px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:.03em}
+.hero{padding:80px 24px 50px;text-align:center}
+.hero-tag{display:inline-block;font-size:12px;font-weight:500;color:#6E6E73;background:rgba(0,0,0,.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:4px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:.03em;border:1px solid rgba(0,0,0,.06)}
 .hero h1{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-.02em;color:#1D1D1F;margin-bottom:16px;line-height:1.15}
-.hero h1 span{background:linear-gradient(135deg,#0071E3,#5B5EA6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 span{font-weight:800;color:#1D1D1F;position:relative}
+.hero h1 span:after{content:"";position:absolute;bottom:4px;left:0;right:0;height:8px;background:rgba(0,0,0,.08);border-radius:4px;z-index:-1}
 .hero-desc{font-size:17px;color:#6E6E73;max-width:520px;margin:0 auto 28px;line-height:1.6}
 .hero-features{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:36px}
 .hero-feat{display:flex;align-items:center;gap:8px;font-size:14px;color:#6E6E73}
 .hero-feat svg{flex-shrink:0}
-.hero-btn{display:inline-block;font-size:16px;font-weight:600;background:#0071E3;color:#fff;padding:13px 32px;border-radius:28px;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(0,113,227,.3)}
-.hero-btn:hover{background:#0066CC;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,113,227,.4)}
-.hero-scroll{margin-top:40px;animation:bounce 2s infinite}
-.hero-scroll a{color:#AEAEB2;text-decoration:none;font-size:24px}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.hero-btn{display:inline-block;font-size:16px;font-weight:600;background:rgba(0,0,0,.85);color:#fff;padding:13px 32px;border-radius:28px;text-decoration:none;transition:all .2s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hero-btn:hover{background:#1D1D1F;transform:translateY(-1px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+
+/* Scroll Arrow */
+.hero-scroll{margin-top:32px}
+.hero-scroll-btn{display:inline-block;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;animation:float 2.2s ease-in-out infinite;transition:all .2s}
+.hero-scroll-btn:hover{background:rgba(0,0,0,.1)}
+.hero-scroll-btn svg{width:20px;height:20px;margin-top:2px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 
 /* Section titles */
 .sec-title{text-align:center;margin-bottom:40px}
@@ -49,22 +54,22 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
 /* Templates */
 .templates{padding:60px 24px}
 .tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.tpl-card{display:flex;flex-direction:column;align-items:center;padding:28px 16px 20px;background:#fff;border-radius:16px;border:1px solid #E5E5EA;text-decoration:none;color:#1D1D1F;transition:all .2s}
-.tpl-card:hover{border-color:#0071E3;box-shadow:0 8px 30px rgba(0,0,0,.06);transform:translateY(-2px)}
+.tpl-card{display:flex;flex-direction:column;align-items:center;padding:28px 16px 20px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,.06);text-decoration:none;color:#1D1D1F;transition:all .25s}
+.tpl-card:hover{border-color:rgba(0,0,0,.15);box-shadow:0 8px 30px rgba(0,0,0,.05);transform:translateY(-2px)}
 .tpl-card img{width:64px;height:64px;border-radius:12px;margin-bottom:14px;background:#FBFBFD;padding:10px}
 .tpl-card h3{font-size:15px;font-weight:600;margin-bottom:4px}
 .tpl-card p{font-size:12px;color:#AEAEB2}
-.tpl-more{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:28px 16px 20px;background:#FBFBFD;border-radius:16px;border:1px dashed #D2D2D7;text-decoration:none;color:#86868B;transition:all .2s;cursor:pointer}
-.tpl-more:hover{border-color:#0071E3;color:#0071E3}
+.tpl-more{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:28px 16px 20px;background:rgba(0,0,0,.02);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;border:1px dashed rgba(0,0,0,.1);text-decoration:none;color:#86868B;transition:all .2s;cursor:pointer}
+.tpl-more:hover{border-color:rgba(0,0,0,.25);color:#1D1D1F}
 .tpl-more .more-icon{font-size:32px;margin-bottom:8px}
 .tpl-more span{font-size:14px;font-weight:500}
 .tpl-cta{text-align:center;margin-top:32px}
 
 /* Features */
-.features{padding:60px 24px;background:#fff;border-top:1px solid #F0F0F5;border-bottom:1px solid #F0F0F5}
+.features{padding:60px 24px;background:#fff;border-top:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04)}
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
 .feat-card{text-align:center;padding:32px 20px}
-.feat-icon{width:48px;height:48px;background:#E8F0FE;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.feat-icon{width:52px;height:52px;background:rgba(0,0,0,.04);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid rgba(0,0,0,.06)}
 .feat-card h3{font-size:17px;font-weight:600;margin-bottom:8px}
 .feat-card p{font-size:13px;color:#86868B;max-width:260px;margin:0 auto;line-height:1.7}
 
@@ -72,25 +77,25 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
 .steps{padding:60px 24px}
 .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .step-card{text-align:center;position:relative}
-.step-num{width:40px;height:40px;background:#0071E3;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;margin:0 auto 16px}
+.step-num{width:44px;height:44px;background:rgba(0,0,0,.85);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;margin:0 auto 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .step-card h3{font-size:16px;font-weight:600;margin-bottom:6px}
 .step-card p{font-size:13px;color:#86868B}
 .step-arrow{display:none}
 
 /* FAQ */
-.faq{padding:60px 24px;background:#fff;border-top:1px solid #F0F0F5}
+.faq{padding:60px 24px;background:#fff;border-top:1px solid rgba(0,0,0,.04)}
 .faq-list{max-width:720px;margin:0 auto}
-.faq-item{border-bottom:1px solid #E5E5EA;padding:18px 0}
+.faq-item{border-bottom:1px solid rgba(0,0,0,.06);padding:18px 0}
 .faq-q{font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
 .faq-q:after{content:"+";font-size:20px;color:#86868B;transition:transform .2s}
-.faq-q.open:after{content:"−";transform:rotate(180deg)}
+.faq-q.open:after{content:"−"}
 .faq-a{font-size:13px;color:#6E6E73;line-height:1.8;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
 .faq-a.open{max-height:300px;padding-top:10px}
 
 /* SEO */
 .seo{padding:60px 24px}
-.seo-block{margin-bottom:12px;border:1px solid #E5E5EA;border-radius:12px;overflow:hidden}
-.seo-summary{font-size:14px;font-weight:600;color:#1D1D1F;padding:14px 20px;cursor:pointer;list-style:none;background:#FBFBFD;display:flex;justify-content:space-between;align-items:center}
+.seo-block{margin-bottom:12px;border:1px solid rgba(0,0,0,.06);border-radius:12px;overflow:hidden}
+.seo-summary{font-size:14px;font-weight:600;color:#1D1D1F;padding:14px 20px;cursor:pointer;list-style:none;background:rgba(0,0,0,.02);display:flex;justify-content:space-between;align-items:center}
 .seo-summary::-webkit-details-marker{display:none}
 .seo-summary:after{content:"展开▾";font-size:11px;color:#86868B;font-weight:400}
 .seo-block[open] .seo-summary:after{content:"收起▴"}
@@ -107,7 +112,7 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
 
 /* Responsive */
 @media(max-width:768px){
-  .hero{padding:50px 16px 40px}
+  .hero{padding:50px 16px 30px}
   .steps-grid{grid-template-columns:1fr;gap:16px}
   .tpl-grid{grid-template-columns:repeat(2,1fr)}
   .feat-grid{grid-template-columns:1fr}
@@ -138,20 +143,20 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
   <p class="hero-desc">专业级电子印章在线制作工具，无需下载任何软件，浏览器中即可完成从设计到导出的全流程。</p>
   <div class="hero-features">
     <div class="hero-feat">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#636366" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       35种印章模板
     </div>
     <div class="hero-feat">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#636366" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       支持PDF盖章
     </div>
     <div class="hero-feat">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#636366" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
       透明PNG导出
     </div>
   </div>
   <a href="yinzhang/yuanxingyinzhang/" class="hero-btn">开始制作印章 →</a>
-  <div class="hero-scroll"><a href="#templates">↓</a></div>
+  <div class="hero-scroll"><button class="hero-scroll-btn" onclick="document.getElementById('templates').scrollIntoView({behavior:'smooth'})" aria-label="向下滚动"><svg viewBox="0 0 24 24" fill="none" stroke="#86868B" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
 </section>
 
 <!-- Templates -->
@@ -219,21 +224,21 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
     <div class="feat-grid">
       <div class="feat-card">
         <div class="feat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#636366" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         </div>
         <h3>支持PDF盖章</h3>
         <p>上传PDF文件，在线调整印章位置、大小和角度，一键导出盖章后的文件。</p>
       </div>
       <div class="feat-card">
         <div class="feat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#636366" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
         </div>
         <h3>透明背景导出</h3>
         <p>支持PNG透明背景格式导出，印章可直接用于Word、Excel、PPT等办公软件中。</p>
       </div>
       <div class="feat-card">
         <div class="feat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0071E3" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#636366" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>实时在线编辑</h3>
         <p>所有参数实时预览，调整字体、间距、颜色、老化效果，所见即所得，无需等待渲染。</p>
@@ -363,11 +368,25 @@ body{font-family:"Inter","SF Pro Display",-apple-system,"Microsoft YaHei","PingF
 </footer>
 
 <script>
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'})})});
-
-// FAQ toggle
-document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.classList.toggle('open');q.nextElementSibling.classList.toggle('open')})});
+// Smooth scroll for all anchor links + mobile touch support
+(function(){
+  function smoothTo(el){ if(el) el.scrollIntoView({behavior:'smooth',block:'start'}) }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      smoothTo(document.querySelector(this.getAttribute('href')));
+    });
+  });
+  // FAQ toggle
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      this.classList.toggle('open');
+      this.nextElementSibling.classList.toggle('open');
+    });
+  });
+  // Touch-friendly: prevent passive event issues on mobile
+  document.addEventListener('touchstart',function(){},{passive:true});
+})();
 </script>
 </body>
 </html>
