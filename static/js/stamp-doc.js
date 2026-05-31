@@ -113,7 +113,7 @@
     '.stamp-btn-cancel:hover{background:#E5E5EA}',
     '.stamp-btn-reset{background:#F0F0F5;color:#6E6E73}',
     '.stamp-btn-reset:hover{background:#E5E5EA}',
-    '@media(max-width:768px){.stamp-modal-content{width:96vw;height:85vh;border-radius:12px}.stamp-upload-zone{width:90%;padding:32px 16px}.stamp-bottombar{flex-direction:column;align-items:stretch}.stamp-bottombar-right{justify-content:flex-end}.stamp-docx-content{width:100%;padding:16px;font-size:12px}}',
+    '@media(max-width:768px){.stamp-modal-content{width:96vw;height:85vh;border-radius:12px}.stamp-upload-zone{width:90%;padding:32px 16px}.stamp-bottombar{flex-direction:column;align-items:stretch}.stamp-bottombar-right{justify-content:flex-end}.stamp-docx-content{width:100%;padding:16px;font-size:12px}.stamp-handle{width:20px;height:20px;border-width:3px}.stamp-handle-tl{top:-10px;left:-10px}.stamp-handle-tr{top:-10px;right:-10px}.stamp-handle-bl{bottom:-10px;left:-10px}.stamp-handle-br{bottom:-10px;right:-10px}.stamp-handle-rotate{top:-36px;width:24px;height:24px}.stamp-handle-rotate:after{height:16px}}',
     '</style>'
   ].join('');
 
@@ -335,45 +335,85 @@
 
   function resetStamp() { placeStamp(); }
 
-  // ===== Dragging =====
+  // ===== Dragging (Desktop + Mobile Touch) =====
+  var pinchDist0 = 0, pinchW0 = 0, pinchH0 = 0, pinchAngle0 = 0, pinchRot0 = 0;
+  var pinchCenterX = 0, pinchCenterY = 0;
+
+  function getXY(e) {
+    // Get clientX/Y from mouse or touch event
+    if (e.touches) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    if (e.changedTouches) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+    return { x: e.clientX, y: e.clientY };
+  }
+
+  function getDist(t1, t2) {
+    var dx = t1.clientX - t2.clientX;
+    var dy = t1.clientY - t2.clientY;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+
+  function getAngle(t1, t2) {
+    return Math.atan2(t2.clientY - t1.clientY, t2.clientX - t1.clientX) * 180 / Math.PI;
+  }
+
+  function getMidpoint(t1, t2) {
+    return { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
+  }
+
   function initStampDragging() {
     var overlay = document.getElementById('stampOverlay');
+    var viewer = document.getElementById('stampDocViewer');
+    var isTouchDevice = 'ontouchstart' in window;
 
-    overlay.addEventListener('mousedown', function(e) {
+    // --- Mouse & Single-Touch: move stamp ---
+    function onDragStart(e) {
       if (e.target.classList.contains('stamp-handle')) return;
+      if (e.touches && e.touches.length > 1) return; // multi-touch handled separately
+      var p = getXY(e);
       isDragging = true;
-      dragStartX = e.clientX; dragStartY = e.clientY;
+      dragStartX = p.x; dragStartY = p.y;
       dragInitX = stampState.x; dragInitY = stampState.y;
       e.preventDefault();
-    });
+    }
 
+    overlay.addEventListener('mousedown', onDragStart);
+    overlay.addEventListener('touchstart', onDragStart, { passive: false });
+
+    // --- Handle: resize & rotate ---
     document.querySelectorAll('.stamp-handle').forEach(function(h) {
-      h.addEventListener('mousedown', function(e) {
-        var d = this.getAttribute('data-dir');
+      function onHandleStart(e) {
+        if (e.touches && e.touches.length > 1) return;
+        var p = getXY(e);
+        var d = h.getAttribute('data-dir');
         if (d === 'rotate') {
           isRotating = true;
-          dragStartX = e.clientX; dragStartY = e.clientY;
+          dragStartX = p.x; dragStartY = p.y;
           dragInitRot = stampState.rotation;
         } else {
           isResizing = true; resizeDir = d;
-          dragStartX = e.clientX; dragStartY = e.clientY;
+          dragStartX = p.x; dragStartY = p.y;
           dragInitX = stampState.x; dragInitY = stampState.y;
           dragInitW = stampState.w; dragInitH = stampState.h;
         }
         e.preventDefault(); e.stopPropagation();
-      });
+      }
+      h.addEventListener('mousedown', onHandleStart);
+      h.addEventListener('touchstart', onHandleStart, { passive: false });
     });
 
-    document.addEventListener('mousemove', function(e) {
+    // --- Document-level move (mouse & single touch) ---
+    function onMove(e) {
+      if (!isDragging && !isResizing && !isRotating) return;
+      var p = getXY(e);
       if (isDragging) {
-        stampState.x = dragInitX + e.clientX - dragStartX;
-        stampState.y = dragInitY + e.clientY - dragStartY;
+        stampState.x = dragInitX + p.x - dragStartX;
+        stampState.y = dragInitY + p.y - dragStartY;
         applyTransform();
       } else if (isResizing) {
-        var dx = e.clientX - dragStartX, dy = e.clientY - dragStartY;
+        var dx = p.x - dragStartX, dy = p.y - dragStartY;
         var ratio = dragInitW / dragInitH;
         var sw = resizeDir.indexOf('e') >= 0 ? 1 : -1;
-        var nw = Math.max(40, dragInitW + dx * sw), nh = nw / ratio;
+        var nw = Math.max(30, dragInitW + dx * sw), nh = nw / ratio;
         if (resizeDir.indexOf('w') >= 0) stampState.x = dragInitX - (nw - dragInitW);
         if (resizeDir.indexOf('n') >= 0) stampState.y = dragInitY - (nh - dragInitH);
         stampState.w = nw; stampState.h = nh;
@@ -381,22 +421,68 @@
       } else if (isRotating) {
         var cx = stampState.x + stampState.w/2, cy = stampState.y + stampState.h/2;
         var a1 = Math.atan2(dragStartY - cy, dragStartX - cx);
-        var a2 = Math.atan2(e.clientY - cy, e.clientX - cx);
+        var a2 = Math.atan2(p.y - cy, p.x - cx);
         stampState.rotation = dragInitRot + (a2 - a1) * 180 / Math.PI;
         applyTransform();
       }
+    }
+
+    function onEnd() { isDragging = isResizing = isRotating = false; }
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+
+    // --- Pinch-to-Zoom & Two-Finger Rotate (Mobile) ---
+    viewer.addEventListener('touchstart', function(e) {
+      if (!overlay.getAttribute('data-placed')) return;
+      if (e.touches.length === 2) {
+        // Start pinch
+        var t1 = e.touches[0], t2 = e.touches[1];
+        pinchDist0 = getDist(t1, t2);
+        pinchW0 = stampState.w; pinchH0 = stampState.h;
+        pinchAngle0 = getAngle(t1, t2);
+        pinchRot0 = stampState.rotation;
+        var mid = getMidpoint(t1, t2);
+        pinchCenterX = mid.x; pinchCenterY = mid.y;
+        isDragging = isResizing = isRotating = false; // cancel single-touch
+      }
+    }, { passive: false });
+
+    viewer.addEventListener('touchmove', function(e) {
+      if (!overlay.getAttribute('data-placed')) return;
+      if (e.touches.length === 2 && pinchDist0 > 0) {
+        e.preventDefault();
+        var t1 = e.touches[0], t2 = e.touches[1];
+        var newDist = getDist(t1, t2);
+        var scale = newDist / pinchDist0;
+        var nw = Math.max(30, Math.min(500, pinchW0 * scale));
+        var nh = pinchH0 * (nw / pinchW0);
+        // Scale from pinch center
+        stampState.x += (pinchW0 - nw) / 2;
+        stampState.y += (pinchH0 - nh) / 2;
+        stampState.w = nw; stampState.h = nh;
+        // Rotation from two-finger angle change
+        var newAngle = getAngle(t1, t2);
+        stampState.rotation = pinchRot0 + (newAngle - pinchAngle0);
+        applyTransform();
+      }
+    }, { passive: false });
+
+    viewer.addEventListener('touchend', function(e) {
+      if (e.touches.length < 2) { pinchDist0 = 0; }
     });
 
-    document.addEventListener('mouseup', function(){ isDragging = isResizing = isRotating = false; });
-
-    document.getElementById('stampDocViewer').addEventListener('wheel', function(e) {
+    // --- Desktop Wheel ---
+    viewer.addEventListener('wheel', function(e) {
       if (!overlay.getAttribute('data-placed')) return;
       e.preventDefault();
       if (e.shiftKey) {
         stampState.rotation += e.deltaY > 0 ? -5 : 5;
       } else {
         var f = e.deltaY > 0 ? 0.95 : 1.05;
-        var nw = Math.max(40, Math.min(500, stampState.w * f));
+        var nw = Math.max(30, Math.min(500, stampState.w * f));
         var nh = stampState.h * (nw / stampState.w);
         stampState.x -= (nw - stampState.w) / 2;
         stampState.y -= (nh - stampState.h) / 2;
