@@ -194,11 +194,12 @@
                     var count = this.input01.length;// 字数   
                     var angle = 4 * Math.PI / (3 * count + 30 - this.fontGap01);
                     var chars = this.input01.split("");
+                    var centerAngle = 4.6076692253; // fixed center at default text
                     var c;
                     for (var i = 0; i < count; i++) {
                         c = chars[i];// 需要绘制的字符   
                         if (i == 0)
-                            context.rotate((6.8) * Math.PI / 6 - (count - 1) * angle / 2); // center fixed
+                    context.rotate(centerAngle - (count - 1) * angle / 2); // center fixed
                         else
                             context.rotate(angle);
                         context.save();
